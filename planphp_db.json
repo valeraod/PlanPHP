@@ -1,0 +1,434 @@
+{
+  "SCALE": 30,
+  "OX": 90,
+  "OY": 60,
+  "FENCE_OFFSET": 0.4,
+  "FENCE_STEP": 3,
+  "FENCE_STEP_RIGHT": 3,
+  "postLength": 3,
+  "postDepthDefault": 1,
+  "sheetHeight": 2,
+  "crossbarLow": 0.25,
+  "crossbarHigh": 1.75,
+  "redLineDefaultCm": 15,
+  "points": [
+    {
+      "n": "А",
+      "xm": 0,
+      "ym": 0,
+      "t": "post_a",
+      "h": "2,0м",
+      "info": "Столб металл. 60×60, h=2,0м"
+    },
+    {
+      "n": "В",
+      "xm": 0.17,
+      "ym": 0,
+      "t": "simple",
+      "h": "",
+      "info": "Точка на стене"
+    },
+    {
+      "n": "Б",
+      "xm": 7.92,
+      "ym": 0,
+      "t": "wall_corner",
+      "h": "",
+      "info": "Конец каменной стены"
+    },
+    {
+      "n": "Г",
+      "xm": 0.17,
+      "ym": 4.89,
+      "t": "post",
+      "h": "2,2м",
+      "info": "Столб газ. трубы 60×60, h=2,2м"
+    },
+    {
+      "n": "Д",
+      "xm": 0.17,
+      "ym": 10.99,
+      "t": "post",
+      "h": "2,2м",
+      "info": "Столб газ. трубы 60×60, h=2,2м"
+    },
+    {
+      "n": "Е",
+      "xm": 0.17,
+      "ym": 17.16,
+      "t": "post",
+      "h": "2,2м",
+      "info": "Столб газ. трубы 60×60, h=2,2м"
+    },
+    {
+      "n": "Ж",
+      "xm": 0.17,
+      "ym": 18.16,
+      "t": "simple",
+      "h": "",
+      "info": "Точка поворота трубы"
+    },
+    {
+      "n": "З",
+      "xm": 3.83,
+      "ym": 18.16,
+      "t": "post",
+      "h": "2,2м",
+      "info": "Столб газ. трубы 60×60, h=2,2м"
+    },
+    {
+      "n": "И",
+      "xm": 10.14,
+      "ym": 18.16,
+      "t": "post",
+      "h": "2,2м",
+      "info": "Столб газ. трубы 60×60, h=2,2м"
+    },
+    {
+      "n": "К",
+      "xm": 16.68,
+      "ym": 18.16,
+      "t": "post",
+      "h": "2,2м",
+      "info": "Столб газ. трубы 60×60, h=2,2м"
+    },
+    {
+      "n": "Л",
+      "xm": 7.92,
+      "ym": 9.7,
+      "t": "wall_corner",
+      "h": "",
+      "info": "Угол стены дома"
+    },
+    {
+      "n": "М",
+      "xm": 6.34,
+      "ym": 9.7,
+      "t": "wall_corner",
+      "h": "",
+      "info": "Угол стены дома"
+    },
+    {
+      "n": "Н",
+      "xm": 6.34,
+      "ym": 14.84,
+      "t": "wall_corner",
+      "h": "",
+      "info": "Угол стены дома"
+    },
+    {
+      "n": "О",
+      "xm": 10.17,
+      "ym": 14.84,
+      "t": "entry",
+      "h": "",
+      "info": "Начало входа"
+    },
+    {
+      "n": "П",
+      "xm": 12.44,
+      "ym": 14.84,
+      "t": "entry",
+      "h": "",
+      "info": "Конец входа (2,3м)"
+    },
+    {
+      "n": "Р",
+      "xm": 14.7,
+      "ym": 14.84,
+      "t": "wall_corner",
+      "h": "",
+      "info": "Угол стены → далее"
+    }
+  ],
+  "profilePoints": [
+    {
+      "n": "В",
+      "dist": 0,
+      "h": 0.25
+    },
+    {
+      "n": "Г",
+      "dist": 4.89,
+      "h": 0.27
+    },
+    {
+      "n": "Д",
+      "dist": 10.99,
+      "h": 0.32
+    },
+    {
+      "n": "Е",
+      "dist": 17.16,
+      "h": 0.17
+    },
+    {
+      "n": "Ж",
+      "dist": 18.16,
+      "h": 0.39
+    },
+    {
+      "n": "З",
+      "dist": 21.82,
+      "h": 0.4
+    },
+    {
+      "n": "И",
+      "dist": 28.13,
+      "h": 0.88
+    },
+    {
+      "n": "К",
+      "dist": 34.67,
+      "h": 1.18
+    }
+  ],
+  "fencePosts": [
+    {
+      "n": "1",
+      "dist": 0,
+      "fixed": true,
+      "depth": 1.2,
+      "side_fence": "vertical",
+      "info": "Опора 1 — начало трассы"
+    },
+    {
+      "n": "2",
+      "dist": 18.16,
+      "fixed": true,
+      "depth": 1,
+      "side_fence": "corner",
+      "info": "Опора 2 — угловая"
+    },
+    {
+      "n": "3",
+      "dist": 36.61,
+      "fixed": true,
+      "depth": 1,
+      "side_fence": "perpendicular",
+      "info": "Опора 3 — перпендикуляр из Р"
+    },
+    {
+      "n": "4",
+      "dist": 33.09,
+      "fixed": true,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 4 — конец трассы"
+    },
+    {
+      "n": "13",
+      "dist": 2.5,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "vertical",
+      "info": "Опора 13"
+    },
+    {
+      "n": "12",
+      "dist": 5.5,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "vertical",
+      "info": "Опора 12"
+    },
+    {
+      "n": "11",
+      "dist": 8.5,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "vertical",
+      "info": "Опора 11"
+    },
+    {
+      "n": "10",
+      "dist": 11,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "vertical",
+      "info": "Опора 10"
+    },
+    {
+      "n": "9",
+      "dist": 15.66,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "vertical",
+      "info": "Опора 9"
+    },
+    {
+      "n": "5",
+      "dist": 20.66,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 5"
+    },
+    {
+      "n": "6",
+      "dist": 23.16,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 6"
+    },
+    {
+      "n": "17",
+      "dist": 25.66,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 17 — между 6 и 7"
+    },
+    {
+      "n": "7",
+      "dist": 26.66,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 7"
+    },
+    {
+      "n": "8",
+      "dist": 29.16,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 8"
+    },
+    {
+      "n": "15",
+      "dist": 35.11000000000001,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "perpendicular",
+      "info": "Опора 15"
+    },
+    {
+      "n": "16",
+      "dist": 36.11000000000001,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "perpendicular",
+      "info": "Опора 16"
+    },
+    {
+      "n": "14",
+      "dist": 13.33,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "vertical",
+      "info": "Опора 14"
+    },
+    {
+      "n": "18",
+      "dist": 31.13,
+      "fixed": false,
+      "depth": 1,
+      "side_fence": "horizontal",
+      "info": "Опора 18"
+    }
+  ],
+  "redLineSegments": {
+    "A": {
+      "label": "Линия A (1→13)",
+      "anchorPost": "1",
+      "fromPost": "1",
+      "toPost": "13"
+    },
+    "B": {
+      "label": "Линия B (13→12)",
+      "anchorPost": "13",
+      "fromPost": "13",
+      "toPost": "12"
+    },
+    "C": {
+      "label": "Линия C (12→11)",
+      "anchorPost": "12",
+      "fromPost": "12",
+      "toPost": "11"
+    },
+    "D": {
+      "label": "Линия D (11→10)",
+      "anchorPost": "11",
+      "fromPost": "11",
+      "toPost": "10"
+    },
+    "E": {
+      "label": "Линия E (10→14)",
+      "anchorPost": "10",
+      "fromPost": "10",
+      "toPost": "14"
+    },
+    "F": {
+      "label": "Линия F (9→2)",
+      "anchorPost": "9",
+      "fromPost": "9",
+      "toPost": "2"
+    },
+    "G": {
+      "label": "Линия G (2→5)",
+      "anchorPost": "2",
+      "fromPost": "2",
+      "toPost": "5"
+    },
+    "H": {
+      "label": "Линия H (5→6)",
+      "anchorPost": "5",
+      "fromPost": "5",
+      "toPost": "6"
+    },
+    "I": {
+      "label": "Линия I (6→17)",
+      "anchorPost": "6",
+      "fromPost": "6",
+      "toPost": "17"
+    },
+    "J": {
+      "label": "Линия J (17→7)",
+      "anchorPost": "17",
+      "fromPost": "17",
+      "toPost": "7"
+    },
+    "K": {
+      "label": "Линия K (7→8)",
+      "anchorPost": "7",
+      "fromPost": "7",
+      "toPost": "8"
+    },
+    "L": {
+      "label": "Линия L (8→18)",
+      "anchorPost": "8",
+      "fromPost": "8",
+      "toPost": "18"
+    },
+    "M": {
+      "label": "Линия M (14→9)",
+      "anchorPost": "14",
+      "fromPost": "14",
+      "toPost": "9"
+    },
+    "N": {
+      "label": "Линия N (18→4)",
+      "anchorPost": "18",
+      "fromPost": "18",
+      "toPost": "4"
+    }
+  },
+  "redLineDefaults": {
+    "A": 10,
+    "B": 11,
+    "C": 12,
+    "D": 15,
+    "E": 17,
+    "F": 5,
+    "G": 15,
+    "H": 15,
+    "I": 15,
+    "J": 15,
+    "K": 15,
+    "L": 15,
+    "M": 11,
+    "N": 15
+  }
+}
