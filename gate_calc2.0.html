@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Раскрой калитки</title>
+<style>
+  :root{
+    --bp-bg: #0b3556;
+    --bp-bg-deep: #082742;
+    --bp-line: #cfe8f3;
+    --bp-line-dim: #7fb2cc;
+    --bp-accent: #ff8a4c;
+    --bp-accent-dim: #c96a3a;
+    --bp-panel: #0e3f66;
+    --bp-panel-line: #1c5b8c;
+    --bp-good: #7fe0c9;
+    --font-display: 'Rubik', 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bp-bg);color:var(--bp-line);font-family:var(--font-display);}
+  body{
+    background-image:
+      linear-gradient(var(--bp-panel-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bp-panel-line) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-color: var(--bp-bg);
+    min-height:100vh;
+    padding: 20px;
+  }
+  .sheet{
+    max-width: 1180px;
+    margin: 0 auto;
+    border: 1.5px solid var(--bp-line-dim);
+    background: var(--bp-bg-deep);
+    box-shadow: 0 0 0 6px var(--bp-bg-deep), 0 8px 40px rgba(0,0,0,0.4);
+  }
+  .titleblock{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1.5px solid var(--bp-line-dim);
+    padding: 16px 22px;
+  }
+  .titleblock h1{
+    margin:0;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--bp-line);
+  }
+  .titleblock .sub{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--bp-line-dim);
+    letter-spacing: 0.05em;
+  }
+  .stamp{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--bp-accent);
+    border: 1px solid var(--bp-accent-dim);
+    padding: 4px 10px;
+    letter-spacing: 0.08em;
+  }
+  .layout{
+    display:grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+  }
+  @media (max-width: 860px){ .layout{grid-template-columns: 1fr;} }
+
+  .inputs{
+    border-right: 1.5px solid var(--bp-line-dim);
+    padding: 20px;
+  }
+  .field{ margin-bottom: 16px; }
+  .field label{
+    display:block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bp-line-dim);
+    margin-bottom: 5px;
+  }
+  .field input{
+    width: 100%;
+    background: var(--bp-panel);
+    border: 1px solid var(--bp-panel-line);
+    color: var(--bp-line);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    padding: 8px 10px;
+    outline: none;
+  }
+  .field input:focus{ border-color: var(--bp-accent); }
+  .field .unit{ color: var(--bp-line-dim); font-size: 11px; margin-left: 6px; }
+
+  details{ margin-top: 8px; border-top: 1px dashed var(--bp-panel-line); padding-top: 12px;}
+  summary{
+    cursor:pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--bp-line-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  details .field{ margin-top: 14px; }
+
+  .warn{
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--bp-accent);
+    border: 1px solid var(--bp-accent-dim);
+    padding: 8px 10px;
+    display:none;
+  }
+
+  .canvas-area{ padding: 20px; }
+  .drawing{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height: 320px;
+    border: 1px dashed var(--bp-panel-line);
+    padding: 10px;
+  }
+  svg text{ font-family: var(--font-mono); fill: var(--bp-line); }
+  .dim-line{ stroke: var(--bp-line-dim); stroke-width: 1; }
+  .member{ fill: none; stroke: var(--bp-line); stroke-width: 1.4; }
+  .brace{ fill: rgba(255,138,76,0.14); stroke: var(--bp-accent); stroke-width: 1.2; }
+
+  .results{
+    margin-top: 22px;
+  }
+  .grid-2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 700px){ .grid-2{grid-template-columns: 1fr;} }
+
+  .card{
+    border: 1px solid var(--bp-panel-line);
+    background: var(--bp-panel);
+    padding: 14px 16px;
+  }
+  .card h3{
+    margin: 0 0 10px 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bp-line-dim);
+    font-weight: 600;
+    border-bottom: 1px solid var(--bp-panel-line);
+    padding-bottom: 8px;
+  }
+  .kv{ display:flex; justify-content:space-between; font-family: var(--font-mono); font-size: 13px; padding: 3px 0; }
+  .kv .v{ color: var(--bp-good); }
+  .kv .v.accent{ color: var(--bp-accent); }
+
+  table.pieces{ width:100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px; }
+  table.pieces th{ text-align:left; color: var(--bp-line-dim); font-weight:500; font-size: 11px; text-transform:uppercase; letter-spacing:0.05em; padding-bottom:6px; border-bottom: 1px solid var(--bp-panel-line);}
+  table.pieces td{ padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  table.pieces td.num{ text-align:right; color: var(--bp-good); }
+
+  .cutlayout{ margin-top: 10px; }
+  .bar-row{ margin-bottom: 10px; }
+  .bar-label{ font-family: var(--font-mono); font-size: 11px; color: var(--bp-line-dim); margin-bottom: 3px; }
+  .bar-track{
+    position:relative;
+    height: 26px;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 6px, transparent 6px, transparent 12px);
+    border: 1px solid var(--bp-panel-line);
+  }
+  .bar-piece{
+    position:absolute; top:0; bottom:0;
+    border-right: 1px dashed var(--bp-bg-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--font-mono); font-size: 10px; color: var(--bp-bg-deep);
+    overflow:hidden; white-space:nowrap;
+  }
+  .bar-piece.stile{ background: var(--bp-line); }
+  .bar-piece.rail{ background: #ffd166; }
+  .bar-piece.brace{ background: var(--bp-accent); }
+  .bar-waste{ position:absolute; top:0; bottom:0; background: rgba(255,255,255,0.03); }
+
+  .legend{ display:flex; gap: 16px; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--bp-line-dim); }
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .swatch{ width:10px; height:10px; display:inline-block; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="titleblock">
+    <div>
+      <h1>Раскрой каркаса калитки</h1>
+      <div class="sub">Профиль 40×20 · сторона 40мм в плоскости чертежа</div>
+    </div>
+    <div class="stamp">ЧЕРТ. №1 &nbsp;РЕВ. A</div>
+  </div>
+
+  <div class="layout">
+    <div class="inputs">
+      <div class="field">
+        <label>Тип конструкции</label>
+        <select id="inType">
+          <option value="single">Калитка (одна створка)</option>
+          <option value="double">Ворота (две створки)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Высота H</label>
+        <input type="number" id="inH" value="2000" min="400" step="10"><span class="unit">мм</span>
+      </div>
+      <div class="field">
+        <label id="lblW">Ширина калитки W</label>
+        <input type="number" id="inW" value="1000" min="300" step="10"><span class="unit">мм</span>
+      </div>
+      <div class="field" id="fieldGap" style="display:none;">
+        <label>Зазор между створками</label>
+        <input type="number" id="inGap" value="6" min="0" step="1"><span class="unit">мм</span>
+      </div>
+
+      <details>
+        <summary>Дополнительные параметры</summary>
+        <div class="field">
+          <label>Профиль, сторона в плоскости (t)</label>
+          <input type="number" id="inT" value="40" min="10" step="1"><span class="unit">мм</span>
+        </div>
+        <div class="field">
+          <label>Длина хлыста профиля</label>
+          <input type="number" id="inStock" value="6000" min="1000" step="50"><span class="unit">мм</span>
+        </div>
+        <div class="field">
+          <label>Толщина пропила (kerf)</label>
+          <input type="number" id="inKerf" value="3" min="0" step="0.5"><span class="unit">мм</span>
+        </div>
+      </details>
+
+      <div class="warn" id="warnBox"></div>
+
+      <button id="btnExport" style="margin-top:16px; width:100%; background:var(--bp-panel); border:1px solid var(--bp-panel-line); color:var(--bp-line); font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; padding:10px; cursor:pointer;">Экспорт в JSON</button>
+    </div>
+
+    <div class="canvas-area">
+      <div class="drawing" id="drawingHost"></div>
+
+      <div class="results">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Геометрия секции</h3>
+            <div class="kv"><span>Просвет секции, ширина</span><span class="v" id="rWsec">–</span></div>
+            <div class="kv"><span>Просвет секции, высота</span><span class="v" id="rHsec">–</span></div>
+            <div class="kv"><span>Угол укосины к горизонтали (α)</span><span class="v" id="rAlpha">–</span></div>
+          </div>
+          <div class="card">
+            <h3>Укосина</h3>
+            <div class="kv"><span>Длина заготовки (по длинной кромке, = гипотенузе)</span><span class="v accent" id="rLstock">–</span></div>
+            <div class="kv"><span>Отступ на короткой кромке у перемычки</span><span class="v" id="rNotchRail">–</span></div>
+            <div class="kv"><span>Отступ на короткой кромке у стойки</span><span class="v" id="rNotchStile">–</span></div>
+            <div class="kv" style="font-family:var(--font-mono); font-size:11px; color:var(--bp-line-dim); justify-content:flex-start; margin-top:6px;">Отступ откладывается вдоль профиля (по линейке), не по диагонали</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:18px;">
+          <h3 id="hdrPieces">Список деталей (на 1 калитку)</h3>
+          <table class="pieces">
+            <thead><tr><th>Деталь</th><th style="text-align:right">Длина, мм</th><th style="text-align:right">Кол-во</th></tr></thead>
+            <tbody id="piecesBody"></tbody>
+          </table>
+          <div class="kv" style="margin-top:8px; border-top:1px solid var(--bp-panel-line); padding-top:8px;">
+            <span id="lblTotal1">Общая длина профиля на 1 калитку</span><span class="v accent" id="rTotal1">–</span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 id="hdrLayout1">Раскрой — на 1 калитку</h3>
+            <div class="kv"><span>Хлыстов нужно</span><span class="v accent" id="bars1">–</span></div>
+            <div class="kv"><span>Итоговый отход</span><span class="v" id="waste1">–</span></div>
+            <div class="cutlayout" id="layout1"></div>
+          </div>
+          <div class="card">
+            <h3 id="hdrLayout2">Раскрой — на 2 калитки</h3>
+            <div class="kv"><span>Хлыстов нужно</span><span class="v accent" id="bars2">–</span></div>
+            <div class="kv"><span>Итоговый отход</span><span class="v" id="waste2">–</span></div>
+            <div class="cutlayout" id="layout2"></div>
+          </div>
+        </div>
+        <div class="legend">
+          <span><span class="swatch" style="background:var(--bp-line)"></span>стойка</span>
+          <span><span class="swatch" style="background:#ffd166"></span>перемычка</span>
+          <span><span class="swatch" style="background:var(--bp-accent)"></span>укосина</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fmt(n){ return Math.round(n*10)/10; }
+function deg(rad){ return rad*180/Math.PI; }
+
+function computeGeometry(H,W,t){
+  const Wsec = W - 2*t;
+  const Hsec = H/2 - 1.5*t;
+  const L0 = Math.hypot(Wsec,Hsec);
+  const alpha = Math.atan2(Hsec,Wsec); // radians, angle of the brace to horizontal
+  // Long (far) edge of the brace runs exactly corner-to-corner: length = L0, no correction.
+  // Short (near) edge is notched back at each end to clear the adjoining member:
+  const notchRail = t/Math.tan(alpha);  // axial offset along the profile at the rail-adjacent end
+  const notchStile = t*Math.tan(alpha); // axial offset along the profile at the stile-adjacent end
+  const Lstock = L0; // raw stock length to cut, measured along the long edge
+  return {Wsec,Hsec,L0,alpha,notchRail,notchStile,Lstock};
+}
+
+// simple First-Fit-Decreasing bin packing with kerf between pieces in a bar
+function packPieces(pieceList, stockLength, kerf){
+  const items = [];
+  pieceList.forEach(p=>{
+    for(let i=0;i<p.qty;i++) items.push({length:p.length, label:p.label, cls:p.cls});
+  });
+  items.sort((a,b)=>b.length-a.length);
+  const bins = [];
+  items.forEach(it=>{
+    let placed=false;
+    for(const bin of bins){
+      const extra = bin.items.length>0 ? kerf : 0;
+      if (bin.used + extra + it.length <= stockLength + 1e-6){
+        bin.used += extra + it.length;
+        bin.items.push(it);
+        placed=true;
+        break;
+      }
+    }
+    if(!placed){
+      bins.push({items:[it], used:it.length});
+    }
+  });
+  return bins;
+}
+
+let lastExportData = null;
+
+function render(){
+  const type = document.getElementById('inType').value;
+  const isDouble = type==='double';
+  const H = parseFloat(document.getElementById('inH').value);
+  const W = parseFloat(document.getElementById('inW').value);
+  const gap = isDouble ? parseFloat(document.getElementById('inGap').value)||0 : 0;
+  const t = parseFloat(document.getElementById('inT').value);
+  const stock = parseFloat(document.getElementById('inStock').value);
+  const kerf = parseFloat(document.getElementById('inKerf').value);
+
+  // labels depend on construction type
+  document.getElementById('lblW').textContent = isDouble ? 'Общая ширина проёма ворот W' : 'Ширина калитки W';
+  document.getElementById('fieldGap').style.display = isDouble ? 'block' : 'none';
+  document.getElementById('hdrPieces').textContent = isDouble ? 'Список деталей (на 1 створку)' : 'Список деталей (на 1 калитку)';
+  document.getElementById('lblTotal1').textContent = isDouble ? 'Общая длина профиля на 1 створку' : 'Общая длина профиля на 1 калитку';
+  document.getElementById('hdrLayout1').textContent = isDouble ? 'Раскрой — на 1 створку' : 'Раскрой — на 1 калитку';
+  document.getElementById('hdrLayout2').textContent = isDouble ? 'Раскрой — на весь комплект (2 створки)' : 'Раскрой — на 2 калитки';
+
+  const leafW = isDouble ? (W - gap)/2 : W;
+
+  const warnBox = document.getElementById('warnBox');
+  const geom = computeGeometry(H,leafW,t);
+
+  if (geom.Wsec <= 0 || geom.Hsec <= 0 || leafW <= 0){
+    warnBox.style.display='block';
+    warnBox.textContent = isDouble
+      ? 'Размеры слишком малы: при таком зазоре ширина одной створки получается отрицательной или просвет секции некорректен. Увеличьте W, уменьшите зазор и/или увеличьте H.'
+      : 'Размеры слишком малы: просвет секции получается отрицательным. Увеличьте H и/или W.';
+    ['rWsec','rHsec','rAlpha','rLstock','rNotchRail','rNotchStile','rTotal1','bars1','bars2','waste1','waste2'].forEach(id=>document.getElementById(id).textContent='–');
+    document.getElementById('piecesBody').innerHTML='';
+    document.getElementById('layout1').innerHTML='';
+    document.getElementById('layout2').innerHTML='';
+    document.getElementById('drawingHost').innerHTML='';
+    lastExportData = null;
+    return;
+  }
+  warnBox.style.display='none';
+
+  document.getElementById('rWsec').textContent = fmt(geom.Wsec)+' мм';
+  document.getElementById('rHsec').textContent = fmt(geom.Hsec)+' мм';
+  document.getElementById('rAlpha').textContent = fmt(deg(geom.alpha))+'°';
+  document.getElementById('rNotchRail').textContent = fmt(geom.notchRail)+' мм';
+  document.getElementById('rNotchStile').textContent = fmt(geom.notchStile)+' мм';
+  document.getElementById('rLstock').textContent = fmt(geom.Lstock)+' мм';
+
+  const pieces = [
+    {label:'Стойка (вертикальный профиль)', length:H, qty:2, cls:'stile'},
+    {label:'Перемычка (верх/центр/низ)', length:geom.Wsec, qty:3, cls:'rail'},
+    {label:'Укосина (по гипотенузе)', length:geom.Lstock, qty:2, cls:'brace'}
+  ];
+  const total1 = pieces.reduce((s,p)=>s+p.length*p.qty,0);
+  document.getElementById('rTotal1').textContent = fmt(total1)+' мм';
+
+  const tbody = document.getElementById('piecesBody');
+  tbody.innerHTML = pieces.map(p=>`<tr><td>${p.label}</td><td class="num">${fmt(p.length)}</td><td class="num">${p.qty}</td></tr>`).join('');
+
+  // cutting layouts
+  function doLayout(pieceList, containerId, barsId, wasteId){
+    const bins = packPieces(pieceList, stock, kerf);
+    document.getElementById(barsId).textContent = bins.length;
+    const totalUsed = bins.reduce((s,b)=>s+b.used,0);
+    const totalStock = bins.length*stock;
+    document.getElementById(wasteId).textContent = fmt(totalStock-totalUsed)+' мм';
+
+    const host = document.getElementById(containerId);
+    host.innerHTML = bins.map((bin,idx)=>{
+      let x=0;
+      let piecesHtml='';
+      bin.items.forEach((it,i)=>{
+        const wPct = it.length/stock*100;
+        piecesHtml += `<div class="bar-piece ${it.cls}" style="left:${x/stock*100}%; width:${wPct}%;" title="${it.label}: ${fmt(it.length)} мм">${Math.round(it.length)}</div>`;
+        x += it.length + kerf;
+      });
+      const wastePct = Math.max(0, (stock-bin.used)/stock*100);
+      piecesHtml += `<div class="bar-waste" style="left:${100-wastePct}%; width:${wastePct}%;"></div>`;
+      return `<div class="bar-row"><div class="bar-label">Хлыст ${idx+1} · использовано ${fmt(bin.used)} / ${stock} мм</div><div class="bar-track">${piecesHtml}</div></div>`;
+    }).join('');
+    return bins;
+  }
+
+  const bins1 = doLayout(pieces, 'layout1','bars1','waste1');
+  const pieces2 = pieces.map(p=>({...p, qty:p.qty*2}));
+  const bins2 = doLayout(pieces2, 'layout2','bars2','waste2');
+
+  // drawing
+  drawFrame(H,W,leafW,gap,t,geom,isDouble);
+
+  // stash data for JSON export
+  lastExportData = {
+    type: isDouble ? 'double' : 'single',
+    dimensions: {
+      H_mm: H,
+      W_total_mm: W,
+      leaf_width_mm: fmt(leafW),
+      gap_between_leaves_mm: isDouble ? gap : 0,
+      profile_side_mm: t,
+      stock_length_mm: stock,
+      kerf_mm: kerf,
+      second_leaf_mirrored: isDouble
+    },
+    leaf_geometry: {
+      section_clear_width_mm: fmt(geom.Wsec),
+      section_clear_height_mm: fmt(geom.Hsec),
+      brace_angle_deg: fmt(deg(geom.alpha)),
+      brace_stock_length_mm: fmt(geom.Lstock),
+      notch_at_rail_mm: fmt(geom.notchRail),
+      notch_at_stile_mm: fmt(geom.notchStile)
+    },
+    pieces_per_leaf: pieces.map(p=>({label:p.label, length_mm:fmt(p.length), qty:p.qty})),
+    total_profile_length_per_leaf_mm: fmt(total1),
+    cutting:{
+      per_leaf: {bars: bins1.length, waste_mm: fmt(bins1.reduce((s,b)=>s+stock,0)-bins1.reduce((s,b)=>s+b.used,0))},
+      full_set_two_leaves: {bars: bins2.length, waste_mm: fmt(bins2.reduce((s,b)=>s+stock,0)-bins2.reduce((s,b)=>s+b.used,0))}
+    }
+  };
+}
+
+function drawFrame(H,Wtotal,leafW,gap,t,geom,isDouble){
+  const totalW = isDouble ? (leafW*2 + gap) : Wtotal;
+  const vw=isDouble?440:340, vh=400, pad=36;
+  const s = Math.min((vw-2*pad)/totalW, (vh-2*pad)/H);
+  const toX = x => pad + x*s;
+  const toY = y => pad + (H - y)*s;
+
+  const {Wsec,Hsec,alpha} = geom;
+  const worldNotchRail = t/Math.sin(alpha);  // world-frame reach along the rail face (for drawing only)
+  const worldNotchStile = t/Math.cos(alpha); // world-frame reach along the stile face (for drawing only)
+
+  function braceLocalPts(){
+    // A: exact corner (long edge start) -> R1: notch point along rail face
+    // -> R2: notch point along stile face -> B: exact opposite corner (long edge end)
+    const A = [0, 0];
+    const R1 = [worldNotchRail, 0];
+    const R2 = [Wsec, Hsec - worldNotchStile];
+    const B = [Wsec, Hsec];
+    return [A,R1,R2,B];
+  }
+
+  function pointsFor(originX, originY, mirrorV, mirrorH){
+    let pts = braceLocalPts();
+    if(mirrorV) pts = pts.map(p=>[p[0], Hsec-p[1]]);
+    if(mirrorH) pts = pts.map(p=>[Wsec-p[0], p[1]]);
+    pts = pts.map(p=>[p[0]+originX, p[1]+originY]);
+    return pts.map(p=>`${toX(p[0])},${toY(p[1])}`).join(' ');
+  }
+
+  // draws one leaf whose left edge sits at world x-offset `xOff`, width `w`
+  // mirrorH flips the brace pattern across the leaf's own vertical axis (used for the second leaf of a double gate)
+  function leafSvg(xOff, w, mirrorH){
+    const bottomOrigin = [xOff+t,t];
+    const topOrigin = [xOff+t, H/2 + t/2];
+    const bottomBrace = pointsFor(bottomOrigin[0], bottomOrigin[1], true, mirrorH);
+    const topBrace = pointsFor(topOrigin[0], topOrigin[1], false, mirrorH);
+    return `
+    <rect class="member" x="${toX(xOff)}" y="${toY(H)}" width="${t*s}" height="${H*s}"></rect>
+    <rect class="member" x="${toX(xOff+w-t)}" y="${toY(H)}" width="${t*s}" height="${H*s}"></rect>
+    <rect class="member" x="${toX(xOff+t)}" y="${toY(t)}" width="${(w-2*t)*s}" height="${t*s}"></rect>
+    <rect class="member" x="${toX(xOff+t)}" y="${toY(H)}" width="${(w-2*t)*s}" height="${t*s}"></rect>
+    <rect class="member" x="${toX(xOff+t)}" y="${toY(H/2+t/2)}" width="${(w-2*t)*s}" height="${t*s}"></rect>
+    <polygon class="brace" points="${bottomBrace}"></polygon>
+    <polygon class="brace" points="${topBrace}"></polygon>`;
+  }
+
+  let body;
+  let dimLabel;
+  if(isDouble){
+    body = leafSvg(0, leafW, false) + leafSvg(leafW+gap, leafW, true);
+    dimLabel = `W=${fmt(totalW)} мм (2×${fmt(leafW)} + зазор ${fmt(gap)})`;
+  } else {
+    body = leafSvg(0, leafW, false);
+    dimLabel = `W=${fmt(totalW)} мм`;
+  }
+
+  const svg = `
+  <svg viewBox="0 0 ${vw} ${vh}" width="${vw}" height="${vh}" xmlns="http://www.w3.org/2000/svg">
+    ${body}
+    <text x="${toX(0)}" y="${toY(H)-8}" font-size="11">H=${H} мм</text>
+    <text x="${toX(0)}" y="${toY(0)+16}" font-size="11">${dimLabel}</text>
+  </svg>`;
+  document.getElementById('drawingHost').innerHTML = svg;
+}
+
+function exportJSON(){
+  if(!lastExportData){
+    alert('Нет корректных данных для экспорта — проверьте размеры.');
+    return;
+  }
+  const blob = new Blob([JSON.stringify(lastExportData, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+  a.href = url;
+  a.download = `${lastExportData.type==='double'?'vorota':'kalitka'}_${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+['inH','inW','inT','inStock','inKerf','inGap'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', render);
+});
+document.getElementById('inType').addEventListener('change', ()=>{
+  const type = document.getElementById('inType').value;
+  const wInput = document.getElementById('inW');
+  const cur = parseFloat(wInput.value);
+  if(type==='double' && cur===1000){
+    wInput.value = 3000; // ворота по умолчанию 3 м (по 1,5 м на створку)
+  } else if(type==='single' && cur===3000){
+    wInput.value = 1000;
+  }
+  render();
+});
+document.getElementById('btnExport').addEventListener('click', exportJSON);
+render();
+</script>
+</body>
+</html>
