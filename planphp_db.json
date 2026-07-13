@@ -188,7 +188,7 @@
       "n": "1",
       "dist": 0,
       "fixed": true,
-      "depth": 1,
+      "depth": 1.1,
       "side_fence": "vertical",
       "info": "Опора 1 — начало трассы"
     },
@@ -220,13 +220,13 @@
       "n": "13",
       "dist": 2.5,
       "fixed": false,
-      "depth": 1,
+      "depth": 1.1,
       "side_fence": "vertical",
       "info": "Опора 13"
     },
     {
       "n": "12",
-      "dist": 5.5,
+      "dist": 5,
       "fixed": false,
       "depth": 1,
       "side_fence": "vertical",
@@ -234,7 +234,7 @@
     },
     {
       "n": "11",
-      "dist": 8.5,
+      "dist": 7.5,
       "fixed": false,
       "depth": 1,
       "side_fence": "vertical",
@@ -242,7 +242,7 @@
     },
     {
       "n": "10",
-      "dist": 11,
+      "dist": 10,
       "fixed": false,
       "depth": 1,
       "side_fence": "vertical",
@@ -250,7 +250,7 @@
     },
     {
       "n": "9",
-      "dist": 15.66,
+      "dist": 12.5,
       "fixed": false,
       "depth": 1,
       "side_fence": "vertical",
@@ -282,7 +282,7 @@
     },
     {
       "n": "7",
-      "dist": 26.66,
+      "dist": 28.36,
       "fixed": false,
       "depth": 1,
       "side_fence": "horizontal",
@@ -290,7 +290,7 @@
     },
     {
       "n": "8",
-      "dist": 29.16,
+      "dist": 29.36,
       "fixed": false,
       "depth": 1,
       "side_fence": "horizontal",
@@ -314,7 +314,7 @@
     },
     {
       "n": "14",
-      "dist": 13.33,
+      "dist": 15,
       "fixed": false,
       "depth": 1,
       "side_fence": "vertical",
@@ -322,11 +322,19 @@
     },
     {
       "n": "18",
-      "dist": 31.13,
+      "dist": 16.58,
+      "fixed": false,
+      "depth": 1.04,
+      "side_fence": "vertical",
+      "info": "Опора 18"
+    },
+    {
+      "n": "19",
+      "dist": 31.23,
       "fixed": false,
       "depth": 1,
       "side_fence": "horizontal",
-      "info": "Опора 18"
+      "info": "Опора 19"
     }
   ],
   "redLineSegments": {
@@ -355,16 +363,16 @@
       "toPost": "10"
     },
     "E": {
-      "label": "Линия E (10→14)",
+      "label": "Линия E (10→9)",
       "anchorPost": "10",
       "fromPost": "10",
-      "toPost": "14"
+      "toPost": "9"
     },
     "F": {
-      "label": "Линия F (9→2)",
+      "label": "Линия F (9→14)",
       "anchorPost": "9",
       "fromPost": "9",
-      "toPost": "2"
+      "toPost": "14"
     },
     "G": {
       "label": "Линия G (2→5)",
@@ -397,21 +405,27 @@
       "toPost": "8"
     },
     "L": {
-      "label": "Линия L (8→18)",
+      "label": "Линия L (8→19)",
       "anchorPost": "8",
       "fromPost": "8",
-      "toPost": "18"
+      "toPost": "19"
     },
     "M": {
-      "label": "Линия M (14→9)",
+      "label": "Линия M (14→18)",
       "anchorPost": "14",
       "fromPost": "14",
-      "toPost": "9"
+      "toPost": "18"
     },
     "N": {
-      "label": "Линия N (18→4)",
+      "label": "Линия N (18→2)",
       "anchorPost": "18",
       "fromPost": "18",
+      "toPost": "2"
+    },
+    "O": {
+      "label": "Линия O (19→4)",
+      "anchorPost": "19",
+      "fromPost": "19",
       "toPost": "4"
     }
   },
@@ -419,16 +433,17 @@
     "A": 10,
     "B": 11,
     "C": 12,
-    "D": 15,
-    "E": 17,
-    "F": 5,
-    "G": 15,
-    "H": 15,
-    "I": 15,
-    "J": 15,
-    "K": 15,
-    "L": 15,
-    "M": 11,
-    "N": 15
+    "D": 14,
+    "E": 16,
+    "F": 13,
+    "G": 7,
+    "H": 8,
+    "I": 7,
+    "J": 7,
+    "K": 7,
+    "L": 7,
+    "M": 7,
+    "N": 3,
+    "O": 7
   }
 }
