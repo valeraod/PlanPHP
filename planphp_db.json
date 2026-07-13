@@ -188,7 +188,7 @@
       "n": "1",
       "dist": 0,
       "fixed": true,
-      "depth": 1.1,
+      "depth": 1.02,
       "side_fence": "vertical",
       "info": "Опора 1 — начало трассы"
     },
@@ -220,7 +220,7 @@
       "n": "13",
       "dist": 2.5,
       "fixed": false,
-      "depth": 1.1,
+      "depth": 1.01,
       "side_fence": "vertical",
       "info": "Опора 13"
     },
@@ -252,7 +252,7 @@
       "n": "9",
       "dist": 12.5,
       "fixed": false,
-      "depth": 1,
+      "depth": 1.03,
       "side_fence": "vertical",
       "info": "Опора 9"
     },
@@ -316,7 +316,7 @@
       "n": "14",
       "dist": 15,
       "fixed": false,
-      "depth": 1,
+      "depth": 1.09,
       "side_fence": "vertical",
       "info": "Опора 14"
     },
@@ -324,7 +324,7 @@
       "n": "18",
       "dist": 16.58,
       "fixed": false,
-      "depth": 1.04,
+      "depth": 1.13,
       "side_fence": "vertical",
       "info": "Опора 18"
     },

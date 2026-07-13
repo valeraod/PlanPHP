@@ -1,0 +1,49 @@
+{
+  "type": "double",
+  "dimensions": {
+    "H_mm": 2000,
+    "W_total_mm": 3000,
+    "leaf_width_mm": 1497,
+    "gap_between_leaves_mm": 6,
+    "profile_side_mm": 40,
+    "stock_length_mm": 6000,
+    "kerf_mm": 3,
+    "second_leaf_mirrored": true
+  },
+  "leaf_geometry": {
+    "section_clear_width_mm": 1417,
+    "section_clear_height_mm": 940,
+    "brace_angle_deg": 33.6,
+    "brace_stock_length_mm": 1700.4,
+    "notch_at_rail_mm": 60.3,
+    "notch_at_stile_mm": 26.5
+  },
+  "pieces_per_leaf": [
+    {
+      "label": "Стойка (вертикальный профиль)",
+      "length_mm": 2000,
+      "qty": 2
+    },
+    {
+      "label": "Перемычка (верх/центр/низ)",
+      "length_mm": 1417,
+      "qty": 3
+    },
+    {
+      "label": "Укосина (по гипотенузе)",
+      "length_mm": 1700.4,
+      "qty": 2
+    }
+  ],
+  "total_profile_length_per_leaf_mm": 11651.9,
+  "cutting": {
+    "per_leaf": {
+      "bars": 2,
+      "waste_mm": 333.1
+    },
+    "full_set_two_leaves": {
+      "bars": 5,
+      "waste_mm": 6669.2
+    }
+  }
+}
