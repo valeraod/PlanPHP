@@ -188,7 +188,7 @@
       "n": "1",
       "dist": 0,
       "fixed": true,
-      "depth": 1.02,
+      "depth": 1.06,
       "side_fence": "vertical",
       "info": "Опора 1 — начало трассы"
     },
@@ -220,7 +220,7 @@
       "n": "13",
       "dist": 2.5,
       "fixed": false,
-      "depth": 1.01,
+      "depth": 1.05,
       "side_fence": "vertical",
       "info": "Опора 13"
     },
@@ -228,21 +228,21 @@
       "n": "12",
       "dist": 5,
       "fixed": false,
-      "depth": 1,
+      "depth": 1.04,
       "side_fence": "vertical",
       "info": "Опора 12"
     },
     {
       "n": "11",
-      "dist": 7.5,
+      "dist": 8,
       "fixed": false,
-      "depth": 1,
+      "depth": 1.02,
       "side_fence": "vertical",
       "info": "Опора 11"
     },
     {
       "n": "10",
-      "dist": 10,
+      "dist": 10.5,
       "fixed": false,
       "depth": 1,
       "side_fence": "vertical",
@@ -250,9 +250,9 @@
     },
     {
       "n": "9",
-      "dist": 12.5,
+      "dist": 13,
       "fixed": false,
-      "depth": 1.03,
+      "depth": 1.04,
       "side_fence": "vertical",
       "info": "Опора 9"
     },
@@ -260,7 +260,7 @@
       "n": "5",
       "dist": 20.66,
       "fixed": false,
-      "depth": 1,
+      "depth": 0.99,
       "side_fence": "horizontal",
       "info": "Опора 5"
     },
@@ -268,7 +268,7 @@
       "n": "6",
       "dist": 23.16,
       "fixed": false,
-      "depth": 1,
+      "depth": 1.19,
       "side_fence": "horizontal",
       "info": "Опора 6"
     },
@@ -445,5 +445,184 @@
     "M": 7,
     "N": 3,
     "O": 7
+  },
+  "gates": [
+    {
+      "fromPost": "12",
+      "toPost": "11",
+      "label": "Калитка №1",
+      "type": "vorota",
+      "segments": [],
+      "imported": {
+        "type": "double",
+        "dimensions": {
+          "H_mm": 2000,
+          "W_total_mm": 3000,
+          "leaf_width_mm": 1497,
+          "gap_between_leaves_mm": 6,
+          "profile_side_mm": 40,
+          "stock_length_mm": 6000,
+          "kerf_mm": 3,
+          "second_leaf_mirrored": true
+        },
+        "leaf_geometry": {
+          "section_clear_width_mm": 1417,
+          "section_clear_height_mm": 940,
+          "brace_angle_deg": 33.6,
+          "brace_stock_length_mm": 1700.4,
+          "notch_at_rail_mm": 60.3,
+          "notch_at_stile_mm": 26.5
+        },
+        "pieces_per_leaf": [
+          {
+            "label": "Стойка (вертикальный профиль)",
+            "length_mm": 2000,
+            "qty": 2
+          },
+          {
+            "label": "Перемычка (верх/центр/низ)",
+            "length_mm": 1417,
+            "qty": 3
+          },
+          {
+            "label": "Укосина (по гипотенузе)",
+            "length_mm": 1700.4,
+            "qty": 2
+          }
+        ],
+        "total_profile_length_per_leaf_mm": 11651.9,
+        "cutting": {
+          "per_leaf": {
+            "bars": 2,
+            "waste_mm": 333.1
+          },
+          "full_set_two_leaves": {
+            "bars": 5,
+            "waste_mm": 6669.2
+          }
+        }
+      }
+    },
+    {
+      "fromPost": "15",
+      "toPost": "16",
+      "label": "Калитка №2",
+      "type": "kalitka",
+      "segments": [],
+      "imported": {
+        "type": "single",
+        "dimensions": {
+          "H_mm": 2000,
+          "W_total_mm": 1000,
+          "leaf_width_mm": 1000,
+          "gap_between_leaves_mm": 0,
+          "profile_side_mm": 40,
+          "stock_length_mm": 6000,
+          "kerf_mm": 3,
+          "second_leaf_mirrored": false
+        },
+        "leaf_geometry": {
+          "section_clear_width_mm": 920,
+          "section_clear_height_mm": 940,
+          "brace_angle_deg": 45.6,
+          "brace_stock_length_mm": 1315.3,
+          "notch_at_rail_mm": 39.1,
+          "notch_at_stile_mm": 40.9
+        },
+        "pieces_per_leaf": [
+          {
+            "label": "Стойка (вертикальный профиль)",
+            "length_mm": 2000,
+            "qty": 2
+          },
+          {
+            "label": "Перемычка (верх/центр/низ)",
+            "length_mm": 920,
+            "qty": 3
+          },
+          {
+            "label": "Укосина (по гипотенузе)",
+            "length_mm": 1315.3,
+            "qty": 2
+          }
+        ],
+        "total_profile_length_per_leaf_mm": 9390.6,
+        "cutting": {
+          "per_leaf": {
+            "bars": 2,
+            "waste_mm": 2594.4
+          },
+          "full_set_two_leaves": {
+            "bars": 4,
+            "waste_mm": 5188.8
+          }
+        }
+      }
+    },
+    {
+      "fromPost": "7",
+      "toPost": "8",
+      "label": "Калитка №3",
+      "type": "kalitka",
+      "segments": [],
+      "imported": {
+        "type": "single",
+        "dimensions": {
+          "H_mm": 2000,
+          "W_total_mm": 1000,
+          "leaf_width_mm": 1000,
+          "gap_between_leaves_mm": 0,
+          "profile_side_mm": 40,
+          "stock_length_mm": 6000,
+          "kerf_mm": 3,
+          "second_leaf_mirrored": false
+        },
+        "leaf_geometry": {
+          "section_clear_width_mm": 920,
+          "section_clear_height_mm": 940,
+          "brace_angle_deg": 45.6,
+          "brace_stock_length_mm": 1315.3,
+          "notch_at_rail_mm": 39.1,
+          "notch_at_stile_mm": 40.9
+        },
+        "pieces_per_leaf": [
+          {
+            "label": "Стойка (вертикальный профиль)",
+            "length_mm": 2000,
+            "qty": 2
+          },
+          {
+            "label": "Перемычка (верх/центр/низ)",
+            "length_mm": 920,
+            "qty": 3
+          },
+          {
+            "label": "Укосина (по гипотенузе)",
+            "length_mm": 1315.3,
+            "qty": 2
+          }
+        ],
+        "total_profile_length_per_leaf_mm": 9390.6,
+        "cutting": {
+          "per_leaf": {
+            "bars": 2,
+            "waste_mm": 2594.4
+          },
+          "full_set_two_leaves": {
+            "bars": 4,
+            "waste_mm": 5188.8
+          }
+        }
+      }
+    }
+  ],
+  "calcConfig": {
+    "lagLevels": 3,
+    "stockLength": 3,
+    "stockOnHandLength": 3,
+    "stockOnHand": 40,
+    "leafStockLength": 6,
+    "leafStockOnHandLength": 3,
+    "leafStockOnHand": 0
   }
 }
